@@ -1,0 +1,10 @@
+<h1><%= @registered_application.name %></h1>
+<p><%= @registered_application.url %></p>
+
+<%= link_to "Edit", edit_registered_application_path(@registered_application), class: 'btn btn-success' %>
+
+
+<% if @registered_application %>
+       <%= link_to "Delete registered application", @registered_application, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this topic?' } %> 
+     <% end %>
+
