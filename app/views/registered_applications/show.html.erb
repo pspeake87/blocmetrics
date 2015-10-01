@@ -1,9 +1,8 @@
 <h1><%= @registered_application.name %></h1>
 <p><%= @registered_application.url %></p>
 
-<p><%= @registered_application.events.group(:name).count
-  %></p>
-<p>Number of events <%= @events.count %></p>
+<p><%= pie_chart @registered_application.events.group(:name).count %></p>
+<p><%= line_chart @registered_application.events.group_by_day(:created_at).count %></p>
 
 <%= link_to "Edit", edit_registered_application_path(@registered_application), class: 'btn btn-success' %>
 
