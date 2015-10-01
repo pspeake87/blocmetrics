@@ -10,7 +10,7 @@ group :production do
  end
  
  group :development do
-   gem 'sqlite3'
+   gem 'postgresql'
  end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -29,10 +29,11 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-
+gem 'faker'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'chartkick'
+gem 'groupdate'
 # Use Unicorn as the app server
 # gem 'unicorn'
 gem 'devise'
