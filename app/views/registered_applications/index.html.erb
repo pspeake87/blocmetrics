@@ -1,10 +1,12 @@
 <h1>Registered Applications</h1>
 
- 
+ <% if @current_user %>
 <%= link_to "New Registered Application", new_registered_application_path(@registered_application), class: 'btn btn-success' %>
     
 
 
 <% @registered_applications.each do |registered_applications| %>
   <p><%= link_to registered_applications.url, registered_applications %></p>
+
+<% end %>
 <% end %>

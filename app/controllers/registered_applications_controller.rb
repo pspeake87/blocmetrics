@@ -1,10 +1,19 @@
 class RegisteredApplicationsController < ApplicationController
   def index
-    @registered_applications = RegisteredApplication.all
+    
+    
+  if current_user
+  @user = current_user
+    
+  @registered_applications = @user.registered_applications.all
+else
+end
+  
   end
 
   def show
-    @registered_application = RegisteredApplication.find(params[:id])
+    @user = current_user
+    @registered_application = @user.registered_applications.find(params[:id])
     
     @events = @registered_application.events.group_by(&:name)
   end
@@ -15,7 +24,8 @@ class RegisteredApplicationsController < ApplicationController
 
 
   def create
-      @registered_application = RegisteredApplication.new(params.require(:registered_application).permit(:name, :url))
+      @user = current_user
+      @registered_application = @user.registered_applications.build(params.require(:registered_application).permit(:name, :url))
      if @registered_application.save
        flash[:notice] = "Registered application was saved."
        redirect_to registered_applications_path
@@ -26,13 +36,15 @@ class RegisteredApplicationsController < ApplicationController
    end
 
   def edit
-      @registered_application = RegisteredApplication.find(params[:id])
+      @user = current_user
+      @registered_application = @user.registered_applications.find(params[:id])
 
      
   end
 
   def update
-      @registered_application = RegisteredApplication.find(params[:id])
+      @user = current_user
+      @registered_application = @user.registered_applications.find(params[:id])
        if @registered_application.update_attributes(params.require(:registered_application).permit(:name, :url))
        flash[:notice] = "Registered application was saved."
        redirect_to registered_applications_path
@@ -43,7 +55,8 @@ class RegisteredApplicationsController < ApplicationController
   end
 
   def destroy
-    @registered_application = RegisteredApplication.find(params[:id])
+    @user = current_user
+    @registered_application = @user.registered_applications.find(params[:id])
 
     if @registered_application.destroy
        flash[:notice] = "Registered application was saved."
